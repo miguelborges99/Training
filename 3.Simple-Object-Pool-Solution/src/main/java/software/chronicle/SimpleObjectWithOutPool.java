@@ -119,10 +119,13 @@ public class SimpleObjectWithOutPool {
     }
 
 
+    // run this with -XX:+PrintGCDetails to see GC Pauses
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         for (ObjectPool op : asList(NO_POOL, SINGLE_OBJECT_POOL, THREAD_LOCAL_POOL)) {
 
+            System.out.println("-------------------------------------------------------");
+            System.out.println("running " + op.name());
             final SimpleObjectWithOutPool pool = new SimpleObjectWithOutPool(op);
 
             // warm up
@@ -131,6 +134,8 @@ public class SimpleObjectWithOutPool {
             long l = System.currentTimeMillis();
             pool.run();
             System.out.println("time taken " + (System.currentTimeMillis() - l) + "ms when using " + op.name());
+
         }
+
     }
 }
