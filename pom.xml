@@ -17,12 +17,13 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>software.chronicle</groupId>
         <artifactId>chronicle-enterprise-root-pom</artifactId>
         <version>1.0.5</version>
-        <relativePath />
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>training</artifactId>
@@ -32,9 +33,11 @@
 
 
     <modules>
+        <module>1.Object-Creation</module>
+        <module>2.Fix-Memory-Leak</module>
         <module>Solution</module>
     </modules>
-    
+
     <dependencyManagement>
         <dependencies>
 
@@ -93,7 +96,7 @@
             <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
     </dependencies>
 
     <build>
