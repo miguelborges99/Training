@@ -34,9 +34,11 @@
 
     <modules>
         <module>1.Measuring-Object-Creation</module>
+        <module>1.Measuring-Object-Creation-Solution</module>
         <module>2.Fix-Memory-Leak</module>
+        <module>2.Fix-Memory-Leak-Solution</module>
         <module>3.Simple-Object-Pool</module>
-        <module>Solution</module>
+        <module>3.Simple-Object-Pool-Solution</module>
     </modules>
 
     <dependencyManagement>
@@ -148,10 +150,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <compilerArgument>-Xlint:deprecation</compilerArgument>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>

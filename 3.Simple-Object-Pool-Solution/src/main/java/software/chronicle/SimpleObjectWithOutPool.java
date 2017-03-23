@@ -90,7 +90,7 @@ public class SimpleObjectWithOutPool {
                 }
 
                 // simulates other work in the app
-                for (int j = 0; j < 1_000; j++) {
+                for (int j = 0; j < 1_000L; j++) {
                     count++;
                 }
             }
@@ -104,7 +104,7 @@ public class SimpleObjectWithOutPool {
 
         public Thread newThread(Runnable r) {
             Thread daemonThread = new Thread(r);
-            daemonThread.setDaemon(Boolean.TRUE.booleanValue());
+            daemonThread.setDaemon(true);
             return daemonThread;
         }
     }
