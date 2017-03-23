@@ -12,7 +12,8 @@
         <relativePath/>
     </parent>
 
-    <artifactId>3.Simple-Object-Pool</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
+    <artifactId>3.Simple-Object-Pool-Solution</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>3.Simple-Object-Pool-Solution</name>
 </project>
