@@ -42,6 +42,8 @@
         <module>3.Simple-Object-Pool-Solution</module>
         <module>4.Time-Complexity</module>
         <module>4.Time-Complexity-Solution</module>
+        <module>5.False-Sharing</module>
+        <module>5.False-Sharing-Solution</module>
     </modules>
 
     <dependencyManagement>
