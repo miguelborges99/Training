@@ -14,10 +14,10 @@ public class SimpleObjectWithOutPool {
 
     private static ObjectPool SINGLE_OBJECT_POOL = new ObjectPool() {
 
-        private final AtomicReference<StringBuilder> pool = new AtomicReference<StringBuilder>(new StringBuilder());
+        private final AtomicReference<StringBuilder> pool = new AtomicReference<>(new StringBuilder());
 
         public StringBuilder acquire() {
-            StringBuilder sb = null; // TODO  - re write this line
+            StringBuilder sb = pool.getAndSet(null);
             if (sb == null)
                 return new StringBuilder();
             sb.setLength(0);
@@ -38,7 +38,7 @@ public class SimpleObjectWithOutPool {
     static ObjectPool NO_POOL = new ObjectPool() {
 
         public StringBuilder acquire() {
-            return null; // TODO  - re write this line
+            return new StringBuilder();
         }
 
         public void release(StringBuilder sb) {
@@ -58,7 +58,7 @@ public class SimpleObjectWithOutPool {
         private final ThreadLocal<StringBuilder> pool = ThreadLocal.withInitial(StringBuilder::new);
 
         public StringBuilder acquire() {
-            StringBuilder sb = null; // TODO  -  - re write this line
+            StringBuilder sb = pool.get();
             sb.setLength(0);
             return sb;
         }
