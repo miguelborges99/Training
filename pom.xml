@@ -33,8 +33,9 @@
 
 
     <modules>
-        <module>1.Object-Creation</module>
+        <module>1.Measuring-Object-Creation</module>
         <module>2.Fix-Memory-Leak</module>
+        <module>3.Simple-Object-Pool</module>
         <module>Solution</module>
     </modules>
 
@@ -143,22 +144,7 @@
         </pluginManagement>
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-publish-plugin</artifactId>
-                <configuration>
-                    <checkoutDirectory>${project.build.directory}/scmpublish/javadoc
-                    </checkoutDirectory>
-                    <checkinComment>Publishing javadoc for ${project.artifactId}:${project.version}
-                    </checkinComment>
-                    <content>${project.reporting.outputDirectory}</content>
-                    <skipDeletedFiles>true</skipDeletedFiles>
-                    <pubScmUrl>scm:git:git@github
-                        .com:ClosedHFT/Chronicle-Queue-Enterprise
-                    </pubScmUrl>
-                    <scmBranch>gh-pages</scmBranch>
-                </configuration>
-            </plugin>
+         
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -171,14 +157,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/software/chronicle/enterprise/queue/*Test.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
+       
         </plugins>
     </build>
 
