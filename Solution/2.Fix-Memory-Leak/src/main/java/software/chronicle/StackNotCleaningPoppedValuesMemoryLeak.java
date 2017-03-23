@@ -5,7 +5,7 @@ package software.chronicle;
  */
 public class StackNotCleaningPoppedValuesMemoryLeak {
 
-    public static final int SIZE = 1000;
+    public static final int SIZE = 2000;
 
     private int maxSize;
     private Object[] stackArray;
@@ -45,15 +45,19 @@ public class StackNotCleaningPoppedValuesMemoryLeak {
 
         StackNotCleaningPoppedValuesMemoryLeak stack = new StackNotCleaningPoppedValuesMemoryLeak(SIZE);
 
+        System.out.println("pushing");
         for (int i = 0; i < SIZE; i++) {
-            Thread.sleep(100);
+            Thread.sleep(10);
             stack.push(new byte[1 << 20]);
+            System.out.print(".");
         }
+        System.out.println("\n\npopping");
         for (int i = 0; i < SIZE; i++) {
-            Thread.sleep(100);
+            Thread.sleep(10);
             Object element = stack.pop();
+            System.out.print(".");
         }
-        System.out.println("finished");
+        System.out.println("\n\nfinished");
     }
 
 }
