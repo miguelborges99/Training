@@ -66,6 +66,9 @@ public class Complexity {
     }
 
     private static void logTime(Runnable r, Class<? extends Collection> type) {
+        // warn up
+        r.run();
+
         final long start = System.nanoTime();
         r.run();
         final long latency = TimeUnit.NANOSECONDS.toMicros(System.nanoTime() - start);

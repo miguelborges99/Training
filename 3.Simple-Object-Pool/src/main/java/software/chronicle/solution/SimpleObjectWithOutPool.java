@@ -1,4 +1,6 @@
-package software.chronicle;
+package software.chronicle.solution;
+
+import software.chronicle.ObjectPool;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;

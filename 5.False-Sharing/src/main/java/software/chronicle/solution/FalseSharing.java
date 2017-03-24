@@ -1,4 +1,4 @@
-package software.chronicle;
+package software.chronicle.solution;
 
 
 import java.util.concurrent.Callable;

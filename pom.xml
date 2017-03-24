@@ -44,6 +44,7 @@
         <module>4.Time-Complexity-Solution</module>
         <module>5.False-Sharing</module>
         <module>5.False-Sharing-Solution</module>
+        <module>6.Single-Threaded-vs-Multi-Threaded</module>
     </modules>
 
     <dependencyManagement>
