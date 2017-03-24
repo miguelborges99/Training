@@ -1,4 +1,4 @@
-package software.chronicle;
+package software.chronicle.solution;
 
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class SinlgeThreadedVMulitThreaded {
         long start = System.nanoTime();
         int[] ints = data.stream().sorted().mapToInt(i -> i).toArray();
         long duration = System.nanoTime() - start;
-        System.out.printf("%,d duration(ns) single thread\n", duration);
+        System.out.printf("%,d duration(ns) single thread stream\n", duration);
 
         // to ensure not optimized out
         x = ints[0];
@@ -32,15 +32,12 @@ public class SinlgeThreadedVMulitThreaded {
 
     private static void multiThreadedSorting(List<Integer> data) {
         // warmup
-        // TODO
+        data.parallelStream().sorted().mapToInt(i -> i).toArray();
 
         long start = System.nanoTime();
-
-        int[] ints = {0}; // TODO change this line to use the parallelStream
-
-
+        int[] ints = data.parallelStream().sorted().mapToInt(i -> i).toArray();
         long duration = System.nanoTime() - start;
-        System.out.printf("%,d duration(ns) parallel\n", duration);
+        System.out.printf("%,d duration(ns) multi-threaded parallel-stream\n", duration);
 
         // to ensure not optimized out
         x = ints[0];

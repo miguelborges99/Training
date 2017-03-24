@@ -14,7 +14,7 @@ public class SimpleObjectWithOutPool {
 
     private static ObjectPool SINGLE_OBJECT_POOL = new ObjectPool() {
 
-        private final AtomicReference<StringBuilder> pool = new AtomicReference<StringBuilder>(new StringBuilder());
+        private final AtomicReference<StringBuilder> pool = new AtomicReference<>(new StringBuilder());
 
         public StringBuilder acquire() {
             StringBuilder sb = null; // TODO  - re write this line
@@ -104,7 +104,7 @@ public class SimpleObjectWithOutPool {
 
         public Thread newThread(Runnable r) {
             Thread daemonThread = new Thread(r);
-            daemonThread.setDaemon(Boolean.TRUE.booleanValue());
+            daemonThread.setDaemon(true);
             return daemonThread;
         }
     }
@@ -119,10 +119,13 @@ public class SimpleObjectWithOutPool {
     }
 
 
+    // run this with -XX:+PrintGCDetails to see GC Pauses
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         for (ObjectPool op : asList(NO_POOL, SINGLE_OBJECT_POOL, THREAD_LOCAL_POOL)) {
 
+            System.out.println("-------------------------------------------------------");
+            System.out.println("running " + op.name());
             final SimpleObjectWithOutPool pool = new SimpleObjectWithOutPool(op);
 
             // warm up

@@ -21,7 +21,7 @@ public class FalseSharing implements Callable<Void> {
 
     static {
         for (int i = 0; i < longs.length; i++) {
-            longs[i] = new AtomicLong(); // TODO change this line
+            longs[i] = new AtomicLong(); // TODO change this line to do false sharing
         }
     }
 

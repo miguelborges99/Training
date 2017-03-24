@@ -92,7 +92,7 @@ public class SimpleObjectWithOutPool {
                 }
 
                 // simulates other work in the app
-                for (int j = 0; j < 1_000L; j++) {
+                for (int j = 0; j < 1_000; j++) {
                     count++;
                 }
             }
@@ -136,8 +136,6 @@ public class SimpleObjectWithOutPool {
             long l = System.currentTimeMillis();
             pool.run();
             System.out.println("time taken " + (System.currentTimeMillis() - l) + "ms when using " + op.name());
-
         }
-
     }
 }
