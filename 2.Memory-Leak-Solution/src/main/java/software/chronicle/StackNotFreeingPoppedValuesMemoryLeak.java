@@ -23,7 +23,7 @@ public class StackNotFreeingPoppedValuesMemoryLeak {
 
     private Object pop() {
         Object i = stackArray[pointer];
-        stackArray[pointer] = null;
+        // TODO
         pointer--;
         return i;
     }
