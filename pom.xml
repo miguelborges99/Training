@@ -35,15 +35,10 @@
 
     <modules>
         <module>1.Measuring-Object-Creation</module>
-        <module>1.Measuring-Object-Creation-Solution</module>
-        <module>2.Fix-Memory-Leak</module>
-        <module>2.Fix-Memory-Leak-Solution</module>
+        <module>2.Memory-Leak</module>
         <module>3.Simple-Object-Pool</module>
-        <module>3.Simple-Object-Pool-Solution</module>
         <module>4.Time-Complexity</module>
-        <module>4.Time-Complexity-Solution</module>
         <module>5.False-Sharing</module>
-        <module>5.False-Sharing-Solution</module>
         <module>6.Single-Threaded-vs-Multi-Threaded</module>
     </modules>
 
