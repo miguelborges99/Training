@@ -42,6 +42,7 @@
         <module>6.Single-Threaded-vs-Multi-Threaded</module>
         <module>7.ASM</module>
         <module>8.CreateByteCodeFromString</module>
+        <module>9.OffHeapMap</module>
     </modules>
 
     <dependencyManagement>
