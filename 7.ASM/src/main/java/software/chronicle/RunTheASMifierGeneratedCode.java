@@ -46,7 +46,6 @@ public class RunTheASMifierGeneratedCode implements Opcodes {
         return cw.toByteArray();
     }
 
-
     public static void main(String[] args) throws Exception {
         String name = "HelloWorld2";
         byte[] byteCode = byteCode(name);

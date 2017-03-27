@@ -1,6 +1,5 @@
 package software.chronicle.solution;
 
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutorCompletionService;
@@ -9,14 +8,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class FalseSharing implements Callable<Void> {
 
-    static class PaddedAtomicLong extends AtomicLong {
-        public volatile long o1, o2, o3, o4, o5, o6, o7 = 7L;
-    }
-
     private final static int NUM_THREADS = 4;
     private final static int RUNS = 1000 * 1000 * 1000;
-    private final int i;
-
     private static final AtomicLong[] longs = new AtomicLong[NUM_THREADS];
 
     static {
@@ -24,6 +17,8 @@ public class FalseSharing implements Callable<Void> {
             longs[i] = new PaddedAtomicLong();
         }
     }
+
+    private final int i;
 
     private FalseSharing(final int i) {
         this.i = i;
@@ -56,5 +51,9 @@ public class FalseSharing implements Callable<Void> {
             atomicLong.set(i);
         }
         return null;
+    }
+
+    static class PaddedAtomicLong extends AtomicLong {
+        public volatile long o1, o2, o3, o4, o5, o6, o7 = 7L;
     }
 }

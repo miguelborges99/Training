@@ -13,7 +13,42 @@ import static java.util.Arrays.asList;
 public class SimpleObjectWithOutPool {
 
     private static final DaemonThreadFactory DAEMON_THREAD_FACTORY = new DaemonThreadFactory();
+    static ObjectPool NO_POOL = new ObjectPool() {
 
+        public StringBuilder acquire() {
+            return new StringBuilder();
+        }
+
+        public void release(StringBuilder sb) {
+
+        }
+
+        @Override
+        public String name() {
+            return "no-pool";
+        }
+
+    };
+    static ObjectPool THREAD_LOCAL_POOL = new ObjectPool() {
+
+        private final ThreadLocal<StringBuilder> pool = ThreadLocal.withInitial(StringBuilder::new);
+
+        public StringBuilder acquire() {
+            StringBuilder sb = pool.get();
+            sb.setLength(0);
+            return sb;
+        }
+
+        public void release(StringBuilder sb) {
+
+        }
+
+        @Override
+        public String name() {
+            return "thread-local-pool";
+        }
+
+    };
     private static ObjectPool SINGLE_OBJECT_POOL = new ObjectPool() {
 
         private final AtomicReference<StringBuilder> pool = new AtomicReference<>(new StringBuilder());
@@ -36,46 +71,6 @@ public class SimpleObjectWithOutPool {
         }
 
     };
-
-    static ObjectPool NO_POOL = new ObjectPool() {
-
-        public StringBuilder acquire() {
-            return new StringBuilder();
-        }
-
-        public void release(StringBuilder sb) {
-
-        }
-
-        @Override
-        public String name() {
-            return "no-pool";
-        }
-
-    };
-
-
-    static ObjectPool THREAD_LOCAL_POOL = new ObjectPool() {
-
-        private final ThreadLocal<StringBuilder> pool = ThreadLocal.withInitial(StringBuilder::new);
-
-        public StringBuilder acquire() {
-            StringBuilder sb = pool.get();
-            sb.setLength(0);
-            return sb;
-        }
-
-        public void release(StringBuilder sb) {
-
-        }
-
-        @Override
-        public String name() {
-            return "thread-local-pool";
-        }
-
-    };
-
     private final Callable<Void> work;
     long count;
 
@@ -100,27 +95,6 @@ public class SimpleObjectWithOutPool {
         };
     }
 
-    static class DaemonThreadFactory implements ThreadFactory {
-        DaemonThreadFactory() {
-        }
-
-        public Thread newThread(Runnable r) {
-            Thread daemonThread = new Thread(r);
-            daemonThread.setDaemon(true);
-            return daemonThread;
-        }
-    }
-
-    private void run() throws InterruptedException, ExecutionException {
-        Future<?> f1 = Executors.newSingleThreadExecutor(DAEMON_THREAD_FACTORY).submit(work);
-        Future<?> f2 = Executors.newSingleThreadExecutor(DAEMON_THREAD_FACTORY).submit(work);
-
-        // wait for all threads to finish
-        f1.get();
-        f2.get();
-    }
-
-
     // run this with -XX:+PrintGCDetails to see GC Pauses
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
@@ -136,6 +110,26 @@ public class SimpleObjectWithOutPool {
             long l = System.currentTimeMillis();
             pool.run();
             System.out.println("time taken " + (System.currentTimeMillis() - l) + "ms when using " + op.name());
+        }
+    }
+
+    private void run() throws InterruptedException, ExecutionException {
+        Future<?> f1 = Executors.newSingleThreadExecutor(DAEMON_THREAD_FACTORY).submit(work);
+        Future<?> f2 = Executors.newSingleThreadExecutor(DAEMON_THREAD_FACTORY).submit(work);
+
+        // wait for all threads to finish
+        f1.get();
+        f2.get();
+    }
+
+    static class DaemonThreadFactory implements ThreadFactory {
+        DaemonThreadFactory() {
+        }
+
+        public Thread newThread(Runnable r) {
+            Thread daemonThread = new Thread(r);
+            daemonThread.setDaemon(true);
+            return daemonThread;
         }
     }
 }
