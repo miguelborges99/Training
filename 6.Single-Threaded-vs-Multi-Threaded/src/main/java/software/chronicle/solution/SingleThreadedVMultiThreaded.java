@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SinlgeThreadedVMulitThreaded {
+public class SingleThreadedVMultiThreaded {
 
     private static final int SIZE = 1_000_000;
     private static volatile int x;
@@ -18,28 +18,38 @@ public class SinlgeThreadedVMulitThreaded {
 
     private static void singleThreadedSorting(List<Integer> data) {
         // warmup
-        data.stream().sorted().mapToInt(i -> i).toArray();
+        singleThreadedSort(data);
 
         long start = System.nanoTime();
-        int[] ints = data.stream().sorted().mapToInt(i -> i).toArray();
+        int[] ints = singleThreadedSort(data);
         long duration = System.nanoTime() - start;
-        System.out.printf("%,d duration(ns) single thread stream\n", duration);
+        System.out.printf("%,d duration(ns) single thread\n", duration);
 
         // to ensure not optimized out
         x = ints[0];
     }
 
+    private static int[] singleThreadedSort(List<Integer> data) {
+        return data.stream().sorted().mapToInt(i -> i).toArray();
+    }
+
     private static void multiThreadedSorting(List<Integer> data) {
         // warmup
-        data.parallelStream().sorted().mapToInt(i -> i).toArray();
+        multiThreadedSort(data);
 
         long start = System.nanoTime();
-        int[] ints = data.parallelStream().sorted().mapToInt(i -> i).toArray();
+
+        int[] ints = multiThreadedSort(data);
+
         long duration = System.nanoTime() - start;
-        System.out.printf("%,d duration(ns) multi-threaded parallel-stream\n", duration);
+        System.out.printf("%,d duration(ns) parallel\n", duration);
 
         // to ensure not optimized out
         x = ints[0];
+    }
+
+    private static int[] multiThreadedSort(List<Integer> data) {
+        return data.parallelStream().sorted().mapToInt(i -> i).toArray();
     }
 
     private static List<Integer> randomNumbers() {
@@ -50,5 +60,4 @@ public class SinlgeThreadedVMulitThreaded {
         Collections.shuffle(data);
         return data;
     }
-
 }

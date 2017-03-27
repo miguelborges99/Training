@@ -1,5 +1,6 @@
 package software.chronicle;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -12,8 +13,8 @@ public class PipelineOfTasks {
     }
 
     private static final long SIZE = 1_000_000L;
+    private final Queue<Runnable> queue = new LinkedList<>(); // TODO replace with a thread safe Queue
     private long result;
-    private Queue<Runnable> queue = null; // TODO create the queue
 
     /**
      * task that are created on a number of threads can be executed on a single thread
@@ -21,7 +22,7 @@ public class PipelineOfTasks {
      * @throws InterruptedException
      */
     private PipelineOfTasks() throws InterruptedException {
-        createTasksOnDiffrentThreads();
+        createTasksOnDifferentThreads();
 
         // all the tasks are executed on the main thread
         for (; ; ) {
@@ -31,26 +32,26 @@ public class PipelineOfTasks {
             task.run();
         }
 
-        assert result == 0;
+        System.out.println("Result: " + result);
+        assert result == SIZE;
     }
 
-    private void createTasksOnDiffrentThreads() throws InterruptedException {
+    private void createTasksOnDifferentThreads() throws InterruptedException {
         Thread t1 = new Thread(createTasks());
         Thread t2 = new Thread(createTasks());
-        t1.setDaemon(true);
-        t2.setDaemon(true);
+        t1.start();
+        t2.start();
         t1.join();
         t2.join();
     }
 
     private Runnable createTasks() {
         return () -> {
-            for (long i = -SIZE; i < SIZE; i++) {
-                queue.add(nonThreadSafeAddTask(i));
+            for (long i = 0; i < SIZE; i += 2) {
+                queue.add(nonThreadSafeAddTask(1));
             }
         };
     }
-
 
     private Runnable nonThreadSafeAddTask(long i) {
         return () -> result += i;
