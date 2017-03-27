@@ -3,7 +3,6 @@ package software.chronicle;
 import jdk.internal.org.objectweb.asm.*;
 import sun.misc.Unsafe;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
 public class RunTheASMifierGeneratedCode implements Opcodes {
@@ -51,9 +50,6 @@ public class RunTheASMifierGeneratedCode implements Opcodes {
     public static void main(String[] args) throws Exception {
         String name = "HelloWorld2";
         byte[] byteCode = byteCode(name);
-
-        File dir = new File("software/chronicle/");
-        dir.mkdirs();
 
         // use the unsafe class to load in the class bytes
         final Field f = Unsafe.class.getDeclaredField("theUnsafe");
