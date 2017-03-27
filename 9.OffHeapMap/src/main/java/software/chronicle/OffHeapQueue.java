@@ -15,10 +15,12 @@ import java.io.File;
 public class OffHeapQueue {
 
     public static void main(String[] args) {
-        final SingleChronicleQueue q = SingleChronicleQueueBuilder.binary(new File("file.q4")).build();
+        final SingleChronicleQueue q = SingleChronicleQueueBuilder.binary(new File("q4")).build();
         long end = 0;
+
         final ExcerptAppender appender = q.acquireAppender();
         final ExcerptTailer tailer = q.createTailer().direction(TailerDirection.BACKWARD).toEnd();
+
         try (final DocumentContext dc = tailer.readingDocument()) {
             if (dc.isPresent())
                 end = dc.wire().getValueIn().int64();
@@ -28,7 +30,6 @@ public class OffHeapQueue {
             documentContext.wire().getValueOut().int64(end + 1);
         }
 
-
         final ExcerptTailer direction = tailer.toStart().direction(TailerDirection.FORWARD);
         for (; ; ) {
             try (final DocumentContext dc = direction.readingDocument()) {
@@ -37,6 +38,5 @@ public class OffHeapQueue {
                 System.out.println(dc.wire().getValueIn().int64());
             }
         }
-
     }
 }
