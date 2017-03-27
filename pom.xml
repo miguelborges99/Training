@@ -40,6 +40,8 @@
         <module>4.Time-Complexity</module>
         <module>5.False-Sharing</module>
         <module>6.Single-Threaded-vs-Multi-Threaded</module>
+        <module>7.ASM</module>
+        <module>8.CreateByteCodeFromString</module>
     </modules>
 
     <dependencyManagement>

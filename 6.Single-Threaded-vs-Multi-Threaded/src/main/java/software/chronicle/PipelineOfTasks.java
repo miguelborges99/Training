@@ -6,8 +6,7 @@ import java.util.Queue;
  * @author Rob Austin.
  */
 public class PipelineOfTasks {
-
-
+    
     public static void main(String[] args) throws InterruptedException {
         new PipelineOfTasks();
     }
