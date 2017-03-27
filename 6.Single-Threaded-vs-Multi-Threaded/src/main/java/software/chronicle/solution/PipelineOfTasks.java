@@ -14,9 +14,9 @@ public class PipelineOfTasks {
 
     private static final long SIZE = 1_000_000L;
     private long result;
-    private Queue<Runnable> queue = new ConcurrentLinkedQueue<>();
 
     private Queue<Runnable> queue = new ConcurrentLinkedQueue<>(); // TODO create the queue
+
     /**
      * task that are created on a number of threads can be executed on a single thread
      *

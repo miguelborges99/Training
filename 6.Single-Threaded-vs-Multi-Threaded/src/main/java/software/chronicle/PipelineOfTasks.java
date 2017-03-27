@@ -6,7 +6,7 @@ import java.util.Queue;
  * @author Rob Austin.
  */
 public class PipelineOfTasks {
-    
+
     public static void main(String[] args) throws InterruptedException {
         new PipelineOfTasks();
     }
@@ -14,6 +14,7 @@ public class PipelineOfTasks {
     private static final long SIZE = 1_000_000L;
     private long result;
     private Queue<Runnable> queue = null; // TODO create the queue
+
     /**
      * task that are created on a number of threads can be executed on a single thread
      *
@@ -31,10 +32,6 @@ public class PipelineOfTasks {
         }
 
         assert result == 0;
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        new PipelineOfTasks();
     }
 
     private void createTasksOnDiffrentThreads() throws InterruptedException {
