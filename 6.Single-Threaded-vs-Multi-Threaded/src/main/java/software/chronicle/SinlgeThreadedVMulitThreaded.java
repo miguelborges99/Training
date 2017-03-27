@@ -1,6 +1,5 @@
 package software.chronicle;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +37,6 @@ public class SinlgeThreadedVMulitThreaded {
 
         int[] ints = {0}; // TODO change this line to use the parallelStream
 
-
         long duration = System.nanoTime() - start;
         System.out.printf("%,d duration(ns) parallel\n", duration);
 
@@ -54,6 +52,5 @@ public class SinlgeThreadedVMulitThreaded {
         Collections.shuffle(data);
         return data;
     }
-
 
 }

@@ -2,7 +2,6 @@ package software.chronicle;
 
 import jdk.internal.org.objectweb.asm.util.ASMifier;
 
-
 public class StartHere {
 
     // 1. first dump the code of hello world, this creates some new source code to std out, the code

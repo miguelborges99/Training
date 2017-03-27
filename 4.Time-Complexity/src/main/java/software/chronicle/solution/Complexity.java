@@ -76,7 +76,6 @@ public class Complexity {
         System.out.println(type.getSimpleName() + " " + method + " took " + latency + "us");
     }
 
-
     private static List<String> loadWords() throws IOException {
         final Pattern whiteSpace = Pattern.compile("\\s");
         final List<String> words = new ArrayList<String>();

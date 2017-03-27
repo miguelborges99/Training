@@ -1,6 +1,5 @@
 package software.chronicle.solution;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,6 +50,5 @@ public class SinlgeThreadedVMulitThreaded {
         Collections.shuffle(data);
         return data;
     }
-
 
 }

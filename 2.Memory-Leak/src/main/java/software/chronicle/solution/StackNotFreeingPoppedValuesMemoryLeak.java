@@ -17,6 +17,25 @@ public class StackNotFreeingPoppedValuesMemoryLeak {
         pointer = -1;
     }
 
+    public static void main(String[] args) throws InterruptedException {
+
+        StackNotFreeingPoppedValuesMemoryLeak stack = new StackNotFreeingPoppedValuesMemoryLeak(SIZE);
+
+        System.out.println("pushing");
+        for (int i = 0; i < SIZE; i++) {
+            Thread.sleep(10);
+            stack.push(new byte[1 << 20]);
+            System.out.print(".");
+        }
+        System.out.println("\n\npopping");
+        for (int i = 0; i < SIZE; i++) {
+            Thread.sleep(10);
+            Object element = stack.pop();
+            System.out.print(".");
+        }
+        System.out.println("\n\nfinished");
+    }
+
     private void push(Object j) {
         stackArray[++pointer] = j;
     }
@@ -38,26 +57,6 @@ public class StackNotFreeingPoppedValuesMemoryLeak {
 
     public boolean isFull() {
         return (pointer == maxSize - 1);
-    }
-
-
-    public static void main(String[] args) throws InterruptedException {
-
-        StackNotFreeingPoppedValuesMemoryLeak stack = new StackNotFreeingPoppedValuesMemoryLeak(SIZE);
-
-        System.out.println("pushing");
-        for (int i = 0; i < SIZE; i++) {
-            Thread.sleep(10);
-            stack.push(new byte[1 << 20]);
-            System.out.print(".");
-        }
-        System.out.println("\n\npopping");
-        for (int i = 0; i < SIZE; i++) {
-            Thread.sleep(10);
-            Object element = stack.pop();
-            System.out.print(".");
-        }
-        System.out.println("\n\nfinished");
     }
 
 }

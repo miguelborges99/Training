@@ -50,9 +50,7 @@ public class Complexity {
 
     private static void remove(Class<? extends Collection> type, final List<String> words) {
 
-
         // TODO the word "cat"
-
 
     }
 
@@ -75,7 +73,6 @@ public class Complexity {
         String method = Thread.currentThread().getStackTrace()[2].getMethodName();
         System.out.println(type.getSimpleName() + " " + method + " took " + latency + "us");
     }
-
 
     private static List<String> loadWords() throws IOException {
         final Pattern whiteSpace = Pattern.compile("\\s");

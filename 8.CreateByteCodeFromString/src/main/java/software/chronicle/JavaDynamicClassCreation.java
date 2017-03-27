@@ -19,7 +19,15 @@ import static javax.tools.JavaFileObject.Kind.SOURCE;
  */
 public class JavaDynamicClassCreation {
 
-    public void dynamicClassCreation() throws ClassNotFoundException, IllegalAccessException, InstantiationException, URISyntaxException, NoSuchFieldException {
+    public static void main(String... args)
+            throws ClassNotFoundException, URISyntaxException, NoSuchFieldException, InstantiationException,
+            IllegalAccessException {
+        new JavaDynamicClassCreation().dynamicClassCreation();
+    }
+
+    public void dynamicClassCreation()
+            throws ClassNotFoundException, IllegalAccessException, InstantiationException, URISyntaxException,
+            NoSuchFieldException {
 
         final String className = "HelloWorld";
         final String path = "com.bounded.buffer";
@@ -76,10 +84,6 @@ public class JavaDynamicClassCreation {
         final Object o = aClass.newInstance();
         System.out.println(o);
 
-    }
-
-    public static void main(String... args) throws ClassNotFoundException, URISyntaxException, NoSuchFieldException, InstantiationException, IllegalAccessException {
-        new JavaDynamicClassCreation().dynamicClassCreation();
     }
 
 }
